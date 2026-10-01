@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Opening Welcome Video Popup & Auto-Open Website on Video End (Forced Unmuted & Auto-End)
+    // 1. Opening Welcome Video Popup & Auto-Open Website on Video End (Automatic & Unmuted)
     const welcomePopup = document.getElementById('welcome-popup');
     const openingVideo = document.getElementById('opening-video');
     const closeWelcomeBtn = document.getElementById('close-welcome');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(welcomePopup && openingVideo) {
             openingVideo.muted = false; // Forces video to be unmuted
             openingVideo.play().catch(error => {
-                console.log("Browser restriction on unmuted autoplay:", error);
+                console.log("Browser policy restricted unmuted autoplay. User interaction required:", error);
             });
         }
     });
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.ok) {
-                    alert("✨ Thank you! Your inquiry has been submitted successfully[cite: 1]. Our team at Spirit Adventures will contact you shortly[cite: 1].");
+                    alert("✨ Thank you! Your inquiry has been submitted successfully. Our team at Spirit Adventures will contact you shortly.");
                     if(modal) modal.classList.remove('active');
                     bookingForm.reset();
                 } else {
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (lowerText.includes('ooty') || lowerText.includes('mysore')) {
                 response = "Our 6D 5N Kodaikanal, Ooty & Mysore trip is a fantastic hill station getaway.";
             } else if (lowerText.includes('contact') || lowerText.includes('address')) {
-                response = "We are located at Vasantha Sai Apartments, KPHB, Kukatpally, Hyderabad[cite: 1]. Call us at +91 966 656 7551[cite: 1]!";
+                response = "We are located at Vasantha Sai Apartments, KPHB, Kukatpally, Hyderabad. Call us at +91 966 656 7551!";
             }
 
             addMessage(response, 'bot-msg');
