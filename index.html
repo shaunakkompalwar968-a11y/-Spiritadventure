@@ -5,42 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spirit Adventures | Explore the World, Without Limits</title>
-    <!-- Head Title Logo -->
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="Assests/img/logohead.png">
-    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
-<body>
 
-    <!-- Opening Welcome Video Popup with Skip Button -->
-   <div class="welcome-video-wrapper">
-    <video id="opening-video" autoplay playsinline controls>
-        <source src="Assests/video/Openingvideo.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
-           <div class="welcome-text-box">
+   <body>
+    <!-- Welcome Video Popup Modal -->
+    <div id="welcome-popup" class="welcome-modal">
+        <div class="welcome-modal-content">
+            <button id="close-welcome" class="welcome-close-btn">Skip Video</button>
+            <div class="welcome-video-wrapper">
+                <video id="opening-video" autoplay muted playsinline controls>
+                    <source src="Assests/video/Openingvideo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="welcome-text-box">
                 <h2>Welcome to Spirit Adventures!</h2>
                 <p>Immerse yourself in the ultimate travel experience.</p>
                 <div class="welcome-btn-group">
-                    <button id="enter-site-btn" class="btn yellow-btn" type="button"> Enter Website</button>
-                    <button id="welcome-book-btn" class="btn outline-btn book-trigger" type="button"> Book Now</button>
+                    <button id="enter-site-btn" class="btn yellow-btn">1. Enter Website</button>
+                    <button id="welcome-book-btn" class="btn outline-btn">2. Book Now</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Floating Graphic Badges -->
-    <div class="floating-badge badge-top-right">
-        <i class="fas fa-compass fa-spin"></i>
-        <span>Explore World Without Limits</span>
-    </div>
-
-    <div class="floating-ticket ticket-bottom-left">
-        <i class="fas fa-ticket-alt"></i>
-        <span>Special 2026 Tours Live</span>
     </div>
 
     <!-- Split-Screen Hero Landing Page -->
