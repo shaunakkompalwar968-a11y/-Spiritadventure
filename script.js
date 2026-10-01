@@ -1,12 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Opening Welcome Video Popup & Auto-Open Website on Video End (Automatic & Unmuted)
+    // 1. Navbar Scroll Effect for Transparent to Blur Gradient Transition
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // 2. Opening Welcome Video Popup & Auto-Open Website on Video End
     const welcomePopup = document.getElementById('welcome-popup');
     const openingVideo = document.getElementById('opening-video');
     const closeWelcomeBtn = document.getElementById('close-welcome');
     const enterSiteBtn = document.getElementById('enter-site-btn');
-    const welcomeBookBtn = document.getElementById('welcome-book-btn');
-    const bookingModal = document.getElementById('booking-modal');
 
     const closeWelcomePopup = () => {
         if(welcomePopup && openingVideo) {
@@ -17,14 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', () => {
         if(welcomePopup && openingVideo) {
-            openingVideo.muted = false; // Forces video to be unmuted
+            openingVideo.muted = false;
             openingVideo.play().catch(error => {
-                console.log("Browser policy restricted unmuted autoplay. User interaction required:", error);
+                console.log("Browser policy restricted unmuted autoplay:", error);
             });
         }
     });
 
-    // Automatically open website the exact second the opening video finishes
     if(openingVideo) {
         openingVideo.addEventListener('ended', () => {
             closeWelcomePopup();
@@ -32,25 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(closeWelcomeBtn) closeWelcomeBtn.addEventListener('click', closeWelcomePopup);
-    
-    // "1. Enter Website" button closes popup manually
-    if(enterSiteBtn) {
-        enterSiteBtn.addEventListener('click', closeWelcomePopup);
-    }
-
-    // "2. Book Now" button closes popup and opens booking modal
-    if(welcomeBookBtn) {
-        welcomeBookBtn.addEventListener('click', () => {
-            closeWelcomePopup();
-            if(bookingModal) bookingModal.classList.add('active');
-        });
-    }
+    if(enterSiteBtn) enterSiteBtn.addEventListener('click', closeWelcomePopup);
     
     window.addEventListener('click', (e) => {
         if (e.target === welcomePopup) closeWelcomePopup();
     });
 
-    // 2. Scroll Reveal Animation Observer
+    // 3. Scroll Reveal Animation Observer
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -63,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveals.forEach(reveal => revealOnScroll.observe(reveal));
 
-    // 3. Show More / Show Less Photos Toggle Logic
+    // 4. Show More / Show Less Photos Toggle Logic
     const togglePhotosBtn = document.getElementById('toggle-photos-btn');
     const hiddenPhotos = document.querySelectorAll('.hidden-photo');
 
@@ -71,13 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let isExpanded = false;
         togglePhotosBtn.addEventListener('click', () => {
             isExpanded = !isExpanded;
-            
             hiddenPhotos.forEach(photo => {
-                if(isExpanded) {
-                    photo.classList.add('revealed');
-                } else {
-                    photo.classList.remove('revealed');
-                }
+                if(isExpanded) photo.classList.add('revealed');
+                else photo.classList.remove('revealed');
             });
 
             if(isExpanded) {
@@ -97,13 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let isReviewsExpanded = false;
         toggleReviewsBtn.addEventListener('click', () => {
             isReviewsExpanded = !isReviewsExpanded;
-            
             hiddenReviews.forEach(review => {
-                if(isReviewsExpanded) {
-                    review.classList.add('revealed');
-                } else {
-                    review.classList.remove('revealed');
-                }
+                if(isReviewsExpanded) review.classList.add('revealed');
+                else review.classList.remove('revealed');
             });
 
             if(isReviewsExpanded) {
@@ -115,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Photo Gallery Lightbox Zoom Up Modal Logic
+    // 5. Photo Gallery Lightbox Zoom Up Modal Logic
     const lightboxModal = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
@@ -142,58 +129,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Booking Modal & AJAX Form Submission Logic
-    const modal = document.getElementById('booking-modal');
-    const closeBtn = document.getElementById('close-modal');
-    const bookTriggers = document.querySelectorAll('.book-trigger');
-    const bookingForm = document.getElementById('booking-form');
+    // 6. Separate Modals for Online Booking vs Enquiry Form
+    const onlineBookingModal = document.getElementById('booking-modal');
+    const inquiryModal = document.getElementById('inquiry-modal');
+    
+    const closeBookingBtn = document.getElementById('close-modal');
+    const closeInquiryBtn = document.getElementById('close-inquiry');
 
-    bookTriggers.forEach(btn => {
+    const onlineBookingTriggers = document.querySelectorAll('.book-online-trigger');
+    const inquiryTriggers = document.querySelectorAll('.inquiry-trigger');
+
+    // Open Online Booking Modal (Top Navbar Book Now Button Only)
+    onlineBookingTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            if(modal) modal.classList.add('active');
+            if(onlineBookingModal) {
+                onlineBookingModal.classList.remove('hidden');
+                onlineBookingModal.classList.add('active');
+            }
         });
     });
 
-    if(closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+    // Open Inquiry Modal (All other buttons)
+    inquiryTriggers.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(inquiryModal) {
+                inquiryModal.classList.remove('hidden');
+                inquiryModal.classList.add('active');
+            }
+        });
     });
 
+    if(closeBookingBtn) {
+        closeBookingBtn.addEventListener('click', () => onlineBookingModal.classList.remove('active'));
+    }
+    if(closeInquiryBtn) {
+        closeInquiryBtn.addEventListener('click', () => inquiryModal.classList.remove('active'));
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === onlineBookingModal) onlineBookingModal.classList.remove('active');
+        if (e.target === inquiryModal) inquiryModal.classList.remove('active');
+    });
+
+    // Form Submissions
+    const bookingForm = document.getElementById('booking-form');
     if(bookingForm) {
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = bookingForm.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            
-            const formData = new FormData(bookingForm);
-
-            try {
-                const response = await fetch(bookingForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'json' }
-                });
-
-                if (response.ok) {
-                    alert("✨ Thank you! Your inquiry has been submitted successfully. Our team at Spirit Adventures will contact you shortly.");
-                    if(modal) modal.classList.remove('active');
-                    bookingForm.reset();
-                } else {
-                    alert("Oops! There was a problem submitting your form. Please try again or reach us via WhatsApp.");
-                }
-            } catch (error) {
-                alert("✨ Inquiry submitted successfully! Our team will contact you shortly.");
-                if(modal) modal.classList.remove('active');
-                bookingForm.reset();
-            } finally {
-                btn.innerText = originalText;
-            }
+            alert("🎉 Online Booking & Payment Request Received! Our agent will contact you shortly to complete the transaction.");
+            onlineBookingModal.classList.remove('active');
+            bookingForm.reset();
         });
     }
 
-    // 6. AI Chatbot Logic
+    const inquiryForm = document.getElementById('inquiry-form');
+    if(inquiryForm) {
+        inquiryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alert("✨ Enquiry Submitted Successfully! Our travel desk will respond to your questions shortly.");
+            inquiryModal.classList.remove('active');
+            inquiryForm.reset();
+        });
+    }
+
+    // 7. AI Chatbot Logic
     const chatToggleBtn = document.getElementById('chat-toggle');
     const chatWindow = document.getElementById('chat-window');
     const chatCloseBtn = document.getElementById('chat-close');
@@ -255,11 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const msgDiv = document.createElement('div');
         msgDiv.classList.add('message', className);
         
-        if(isHTML) {
-            msgDiv.innerHTML = text;
-        } else {
-            msgDiv.textContent = text;
-        }
+        if(isHTML) msgDiv.innerHTML = text;
+        else msgDiv.textContent = text;
 
         const id = 'msg-' + Date.now();
         msgDiv.id = id;
