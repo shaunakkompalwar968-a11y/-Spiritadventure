@@ -101,7 +101,7 @@ body::before {
     align-items: center; 
     padding: 22px 40px; 
     z-index: 99999 !important; 
-    background: transparent !important; /* Fully transparent at the top, perfectly merging with home background */
+    background: transparent !important; 
     backdrop-filter: blur(0px); 
     -webkit-backdrop-filter: blur(0px); 
     border-bottom: 1px solid transparent; 
@@ -109,7 +109,6 @@ body::before {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
-/* Scrolled State: Smoothly transitions into frosted glass blur gradient */
 .custom-nav.scrolled {
     background: linear-gradient(135deg, rgba(10, 35, 40, 0.85), rgba(19, 106, 110, 0.85)) !important; 
     backdrop-filter: blur(16px) !important;
@@ -126,6 +125,19 @@ body::before {
 .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--yellow); transition: width 0.3s ease; }
 .nav-links a:hover::after { width: 100%; }
 .nav-right { display: flex; align-items: center; gap: 15px; }
+
+/* Mobile Hamburger Menu Button */
+.mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; padding: 5px; transition: var(--transition); }
+.mobile-menu-btn:hover { color: var(--yellow); }
+
+/* Mobile Navigation Drawer */
+.mobile-drawer { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(10, 35, 40, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100000; display: flex; flex-direction: column; padding: 30px 20px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.mobile-drawer.active { right: 0; }
+.mobile-drawer-close { background: none; border: none; color: white; font-size: 1.8rem; align-self: flex-end; cursor: pointer; margin-bottom: 30px; }
+.mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 20px; flex: 1; }
+.mobile-nav-links a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 600; transition: var(--transition); display: block; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.mobile-nav-links a:hover { color: var(--yellow); padding-left: 5px; }
+.mobile-drawer-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
 
 /* Highly Animated & Attractive Top Navbar "Book Now" Button */
 .login-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--yellow), #f59e0b); color: var(--white); padding: 10px 22px; border-radius: 30px; font-weight: 700; font-size: 0.85rem; cursor: pointer; border: none; transition: var(--transition); text-transform: uppercase; }
@@ -334,6 +346,7 @@ body::before {
     .custom-nav { padding: 15px 20px; }
     .custom-nav.scrolled { padding: 12px 20px; }
     .nav-links { display: none; }
+    .mobile-menu-btn { display: inline-flex; }
     .about-grid { grid-template-columns: 1fr; gap: 30px; }
     .floating-badge, .ticket-bottom-left { display: none; }
     .social-sidebar { display: none; }
@@ -353,6 +366,7 @@ body::before {
     .custom-nav.scrolled { padding: 10px 15px; }
     .nav-logo-img { height: 32px; }
     .login-btn { padding: 6px 14px; font-size: 0.75rem; }
+    .mobile-menu-btn { display: inline-flex; }
     .tour-card { height: 340px; }
     .social-sidebar { display: none; }
     .review-card { width: 100% !important; margin-bottom: 0 !important; }
