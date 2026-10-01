@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
 </head>
 
-   <body>
+<body>
     <!-- Welcome Video Popup Modal -->
     <div id="welcome-popup" class="welcome-modal">
         <div class="welcome-modal-content">
@@ -27,12 +27,35 @@
                 <h2>Welcome to Spirit Adventures!</h2>
                 <p>Immerse yourself in the ultimate travel experience.</p>
                 <div class="welcome-btn-group">
-                    <button id="enter-site-btn" class="btn yellow-btn">1. Enter Website</button>
-                    <button id="welcome-book-btn" class="btn outline-btn">2. Book Now</button>
+                    <button id="enter-site-btn" class="btn yellow-btn">Enter Website</button>
+                    <button id="welcome-book-btn" class="btn outline-btn inquiry-trigger">Enquiry Now</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Fixed Sticky Navbar (Merges with home bg at top, turns to blur gradient on scroll) -->
+    <nav id="navbar" class="custom-nav">
+        <div class="nav-left">
+            <a href="#home">
+                <img src="Assests/img/logo.png" alt="Spirit Adventures Logo" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <!-- Animated Top Navbar Book Now Button for Online Booking -->
+            <button class="login-btn book-online-trigger pulse-nav-btn" type="button">
+                <i class="fas fa-calendar-check"></i> Book Now
+            </button>
+        </div>
+    </nav>
 
     <!-- Split-Screen Hero Landing Page -->
     <section class="split-hero" id="home">
@@ -41,32 +64,6 @@
         <video autoplay loop muted playsinline class="full-bg-video">
             <source src="Assests/video/Bgvideo.mp4" type="video/mp4">
         </video>
-
-        <!-- Navbar Overlay with Official Logo -->
-        <nav class="custom-nav">
-            <div class="nav-left">
-                <a href="#home">
-                    <img src="Assests/img/logo.png" alt="Spirit Adventures Logo" class="nav-logo-img">
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#destinations">Destinations</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="nav-right">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search destination...">
-                    <i class="fas fa-search"></i>
-                </div>
-                <button class="login-btn book-trigger" type="button">
-                    <i class="fas fa-calendar-check"></i> Book Now
-                </button>
-            </div>
-        </nav>
 
         <!-- Left Side: Frosted Teal -->
         <div class="hero-left">
@@ -86,7 +83,7 @@
                 <h2 class="main-title">SPIRIT ADVENTURES</h2>
                 <p class="hero-desc">From dream vacations to business trips, we craft seamless travel experiences tailored just for you. Explore the world, without limits.</p>
                 
-                <button class="btn yellow-btn book-trigger" type="button">EXPLORE NOW <i class="fas fa-play-circle"></i></button>
+                <button class="btn yellow-btn inquiry-trigger" type="button">EXPLORE NOW <i class="fas fa-play-circle"></i></button>
                 <div class="dots-pattern"></div>
             </div>
         </div>
@@ -123,14 +120,14 @@
     <!-- Torn Paper Graphic Divider -->
     <div class="torn-paper-divider"></div>
 
-    <!-- About Section -->
+    <!-- About Section (Enhanced with Full Global Services & Information) -->
     <section id="about" class="about-section section-padding">
         <div class="container">
             <div class="about-grid reveal">
                 <div class="about-text-content">
                     <h3 class="subtitle-tag">WE ARE THE BEST TRAVEL AGENCY</h3>
                     <h2 class="section-heading">Your Trusted Travel Partner</h2>
-                    <p>We are passionate travel experts dedicated to creating unforgettable journeys. Whether you're seeking adventure, relaxation, or cultural exploration, our team ensures every detail is handled with care—so you can focus on making memories.</p>
+                    <p>We are passionate travel experts dedicated to creating unforgettable journeys. From exploring iconic European cities, shopping in Dubai, cruising through Thailand, to relaxing on the beaches of Bali and the Maldives — Spirit Adventures makes international travel easy and hassle-free.</p>
                     <div class="features-grid">
                         <div class="feat-item"><i class="fas fa-check-circle"></i> Easy & Quick Booking</div>
                         <div class="feat-item"><i class="fas fa-check-circle"></i> Best Price Guarantee</div>
@@ -163,6 +160,45 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Integrated Global Services & Why Choose Us Details -->
+            <div class="services-grid-container reveal" style="margin-top: 60px;">
+                <div class="service-category-card tilt-card">
+                    <div class="category-header">
+                        <i class="fas fa-globe" style="color: var(--teal);"></i>
+                        <h3>What We Offer</h3>
+                    </div>
+                    <ul class="service-feature-list">
+                        <li><i class="fas fa-globe-americas"></i> Customized Tour Packages (Domestic & International)</li>
+                        <li><i class="fas fa-plane"></i> Air Ticketing & Hotel Reservations</li>
+                        <li><i class="fas fa-passport"></i> Visa & Travel Insurance Assistance</li>
+                        <li><i class="fas fa-heart"></i> Honeymoon & Family Holiday Packages</li>
+                        <li><i class="fas fa-briefcase"></i> Corporate & Group Tours</li>
+                        <li><i class="fas fa-ship"></i> Cruise Bookings & Adventure Travel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Customer Support</li>
+                    </ul>
+                </div>
+
+                <div class="service-category-card tilt-card">
+                    <div class="category-header">
+                        <i class="fas fa-star" style="color: var(--yellow);"></i>
+                        <h3>Why Choose Spirit Adventures?</h3>
+                    </div>
+                    <ul class="service-feature-list">
+                        <li><i class="fas fa-map-marker-alt"></i> Trusted Local Presence in Hyderabad</li>
+                        <li><i class="fas fa-clipboard-check"></i> End-to-End Travel Planning</li>
+                        <li><i class="fas fa-user-tie"></i> Experienced Travel Experts</li>
+                        <li><i class="fas fa-tags"></i> Best Deals & Transparent Pricing</li>
+                        <li><i class="fas fa-network-wired"></i> Strong Global Network</li>
+                        <li><i class="fas fa-smile-beam"></i> Committed to Customer Satisfaction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Closing Statement Banner -->
+            <div class="closing-quote-banner reveal" style="margin-top: 30px;">
+                <p>"At Spirit Adventures, we don’t just book trips — we create lifelong memories."</p>
+            </div>
         </div>
     </section>
 
@@ -180,7 +216,7 @@
                             <h3>Coorg Getaway</h3>
                             <p><i class="fas fa-map-marker-alt"></i> Abbey Falls & Estates</p>
                         </div>
-                        <button class="btn teal-btn book-trigger" type="button">Explore Details</button>
+                        <button class="btn teal-btn inquiry-trigger" type="button">Explore Details</button>
                     </div>
                 </div>
                 <div class="tour-card tilt-card glow-card">
@@ -191,18 +227,18 @@
                             <h3>Goa Beach Trip</h3>
                             <p><i class="fas fa-map-marker-alt"></i> Beaches & Water Sports</p>
                         </div>
-                        <button class="btn teal-btn book-trigger" type="button">Explore Details</button>
+                        <button class="btn teal-btn inquiry-trigger" type="button">Explore Details</button>
                     </div>
                 </div>
                 <div class="tour-card tilt-card glow-card">
-                    <img src="https://images.unsplash.com/photo-1600100397608-f010f41cb868?auto=format&fit=crop&w=600&q=80" alt="Hampi">
+                    <img src="Assests/img/Hampi.png" alt="Hampi">
                     <div class="tour-badge">4D 3N</div>
                     <div class="tour-content">
                         <div>
                             <h3>Hampi, Gokarna & Dandeli</h3>
                             <p><i class="fas fa-map-marker-alt"></i> Ruins & Beachside Stays</p>
                         </div>
-                        <button class="btn teal-btn book-trigger" type="button">Explore Details</button>
+                        <button class="btn teal-btn inquiry-trigger" type="button">Explore Details</button>
                     </div>
                 </div>
                 <div class="tour-card tilt-card glow-card">
@@ -213,14 +249,14 @@
                             <h3>Kodaikanal, Ooty & Mysore</h3>
                             <p><i class="fas fa-map-marker-alt"></i> Hill Station Bliss</p>
                         </div>
-                        <button class="btn teal-btn book-trigger" type="button">Explore Details</button>
+                        <button class="btn teal-btn inquiry-trigger" type="button">Explore Details</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PHOTO GALLERY GRID (10 Open + 10 Toggleable) -->
+    <!-- PHOTO GALLERY GRID -->
     <section id="gallery" class="gallery-section section-padding">
         <div class="container text-center reveal">
             <h3 class="subtitle-tag">TIMELESS TRAVEL MOMENTS</h3>
@@ -260,7 +296,7 @@
         </div>
     </section>
 
-   <!-- Super Attractive Traveler Experiences & Reviews Section -->
+   <!-- Reviews Section -->
     <section id="reviews" class="reviews-section section-padding bg-light">
         <div class="container text-center reveal">
             <h3 class="subtitle-tag">WALL OF FAME</h3>
@@ -268,7 +304,7 @@
             <p class="gallery-desc">Hear what our happy adventurers have to say about their journeys with Spirit Adventures!</p>
             
             <div class="review-grid">
-                <!-- Review 1 (Visible) -->
+                <!-- Review 1 -->
                 <div class="review-card tilt-card">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -284,7 +320,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 2 (Visible) -->
+                <!-- Review 2 -->
                 <div class="review-card tilt-card">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -300,7 +336,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 3 (Visible) -->
+                <!-- Review 3 -->
                 <div class="review-card tilt-card">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -316,7 +352,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 4 (Hidden Initially) -->
+                <!-- Review 4 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -332,7 +368,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 5 (Hidden Initially) -->
+                <!-- Review 5 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -348,7 +384,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 6 (Hidden Initially) -->
+                <!-- Review 6 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -364,7 +400,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 7 (Hidden Initially) -->
+                <!-- Review 7 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -380,7 +416,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 8 (Hidden Initially) -->
+                <!-- Review 8 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -396,7 +432,7 @@
                     <div class="review-footer">Verified Traveler</div>
                 </div>
 
-                <!-- Review 9 (Hidden Initially) -->
+                <!-- Review 9 -->
                 <div class="review-card tilt-card hidden-review">
                     <div class="review-header">
                         <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
@@ -419,7 +455,7 @@
         </div>
     </section>
 
-    <!-- Footer with Official Logo -->
+    <!-- Footer -->
     <footer id="contact" class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
@@ -457,31 +493,57 @@
         <img id="lightbox-img" src="" alt="Zoomed Travel Photo">
     </div>
 
-    <!-- Booking Modal with Formspree Endpoint -->
+    <!-- 1. Online Booking Modal -->
     <div id="booking-modal" class="modal hidden">
         <div class="modal-content">
             <span id="close-modal" class="close-modal">&times;</span>
-            <h2 style="color: var(--teal); font-weight: 800; margin-bottom: 10px;">Book Your Trip</h2>
-            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Contact us directly or submit your details to get started!</p>
+            <h2 style="color: var(--teal); font-weight: 800; margin-bottom: 5px;">Secure Online Booking</h2>
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Complete your reservation and online payment process.</p>
+            
             <form id="booking-form" action="https://formspree.io/f/mdekbven" method="POST">
                 <input type="text" name="name" placeholder="Full Name" required class="modal-input">
-                <input type="tel" name="phone" placeholder="Phone Number" required class="modal-input">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp Number" required class="modal-input">
                 <input type="email" name="email" placeholder="Email Address" required class="modal-input">
+                
                 <select name="package" required class="modal-input">
-                    <option value="" disabled selected>Select Package</option>
+                    <option value="" disabled selected>Select Tour Package</option>
                     <option value="coorg">2D 1N Coorg Getaway</option>
                     <option value="goa">3D 2N Goa Trip</option>
                     <option value="hampi">4D 3N Hampi, Gokarna & Dandeli</option>
                     <option value="ooty">6D 5N Kodaikanal, Ooty & Mysore</option>
                 </select>
-                <button type="submit" class="btn yellow-btn" style="width: 100%;">Submit Inquiry</button>
+
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <label style="font-size: 0.75rem; font-weight: 600; color: #555; display: block; margin-bottom: 4px;">Travel Date:</label>
+                    <input type="date" name="travel_date" required class="modal-input" style="margin-bottom: 0;">
+                </div>
+
+                <button type="submit" class="btn yellow-btn" style="width: 100%; margin-top: 5px;">Proceed to Payment & Booking</button>
             </form>
         </div>
     </div>
 
-    <!-- Floating Actions (Google Maps Rating Button, WhatsApp & Chatbot) -->
+    <!-- 2. Enquiry Form Modal -->
+    <div id="inquiry-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-inquiry" class="close-modal">&times;</span>
+            <h2 style="color: var(--teal); font-weight: 800; margin-bottom: 5px;">Send an Enquiry</h2>
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Have questions? Drop your details and our team will get in touch.</p>
+            
+            <form id="inquiry-form" action="https://formspree.io/f/mdekbven" method="POST">
+                <input type="text" name="name" placeholder="Full Name" required class="modal-input">
+                <input type="tel" name="phone" placeholder="Phone / WhatsApp Number" required class="modal-input">
+                <input type="email" name="email" placeholder="Email Address" required class="modal-input">
+                <textarea name="message" placeholder="Ask us anything about packages, custom dates, or pricing..." rows="3" required class="modal-input" style="resize: none;"></textarea>
+
+                <button type="submit" class="btn yellow-btn" style="width: 100%; margin-top: 5px;">Submit Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating Actions -->
     <div class="floating-actions">
-        <!-- Google Maps Rating / Review Button -->
+        <!-- Google Maps Rating Button -->
         <a href="https://maps.app.goo.gl/me7tbu9Co6W8F4EHA" target="_blank" class="action-btn map-btn pulse-map" title="Rate Us on Google Maps">
             <i class="fas fa-star"></i>
             <span class="tooltip-text">Rate Us!</span>
@@ -490,9 +552,9 @@
         <a href="https://wa.me/919666567551?text=Hi%20Spirit%20Adventures,%20I%20want%20to%20know%20more%20about%20your%20packages!" target="_blank" class="action-btn wa-btn pulse-anim" title="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <!-- AI Chatbot Toggle Button -->
-        <button id="chat-toggle" class="action-btn chat-btn" type="button" title="Chat with AI Guide">
-            <i class="fas fa-comment-dots"></i>
+        <!-- Highly Animated & Attractive Chatbot Toggle Button -->
+        <button id="chat-toggle" class="action-btn chat-btn pulse-chatbot" type="button" title="Chat with AI Guide">
+            <i class="fas fa-headset"></i>
         </button>
     </div>
 
