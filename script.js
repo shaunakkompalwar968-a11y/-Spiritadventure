@@ -10,7 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Opening Welcome Video Popup & Auto-Open Website on Video End
+    // 2. Mobile Hamburger Menu Drawer Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const mobileDrawerClose = document.getElementById('mobile-drawer-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if(mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.add('active');
+        });
+    }
+
+    if(mobileDrawerClose) {
+        mobileDrawerClose.addEventListener('click', () => {
+            mobileDrawer.classList.remove('active');
+        });
+    }
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(mobileDrawer) mobileDrawer.classList.remove('active');
+        });
+    });
+
+    // 3. Opening Welcome Video Popup & Auto-Open Website on Video End
     const welcomePopup = document.getElementById('welcome-popup');
     const openingVideo = document.getElementById('opening-video');
     const closeWelcomeBtn = document.getElementById('close-welcome');
@@ -45,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === welcomePopup) closeWelcomePopup();
     });
 
-    // 3. Scroll Reveal Animation Observer
+    // 4. Scroll Reveal Animation Observer
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -58,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reveals.forEach(reveal => revealOnScroll.observe(reveal));
 
-    // 4. Show More / Show Less Photos Toggle Logic
+    // 5. Show More / Show Less Photos Toggle Logic
     const togglePhotosBtn = document.getElementById('toggle-photos-btn');
     const hiddenPhotos = document.querySelectorAll('.hidden-photo');
 
@@ -102,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Photo Gallery Lightbox Zoom Up Modal Logic
+    // 6. Photo Gallery Lightbox Zoom Up Modal Logic
     const lightboxModal = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
@@ -129,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Separate Modals for Online Booking vs Enquiry Form
+    // 7. Separate Modals for Online Booking vs Enquiry Form
     const onlineBookingModal = document.getElementById('booking-modal');
     const inquiryModal = document.getElementById('inquiry-modal');
     
@@ -143,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     onlineBookingTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            if(mobileDrawer) mobileDrawer.classList.remove('active'); // Close mobile drawer if open
             if(onlineBookingModal) {
                 onlineBookingModal.classList.remove('hidden');
                 onlineBookingModal.classList.add('active');
@@ -154,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inquiryTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            if(mobileDrawer) mobileDrawer.classList.remove('active'); // Close mobile drawer if open
             if(inquiryModal) {
                 inquiryModal.classList.remove('hidden');
                 inquiryModal.classList.add('active');
@@ -194,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. AI Chatbot Logic
+    // 8. AI Chatbot Logic
     const chatToggleBtn = document.getElementById('chat-toggle');
     const chatWindow = document.getElementById('chat-window');
     const chatCloseBtn = document.getElementById('chat-close');
