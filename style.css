@@ -181,20 +181,30 @@ body::before {
     transform: translateY(0);
 }
 
-/* Zero-Space Hidden State Logic using display:none */
+/* Zero-Space Hidden State Logic using display:none and absolute height elimination */
 .hidden-photo, .hidden-review {
-    display: none;
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
 }
+
 .hidden-photo.revealed {
-    display: block;
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    margin-bottom: 22px !important;
     opacity: 1;
     transform: translateY(0);
 }
+
 .hidden-review.revealed {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
+    height: auto !important;
+    margin-bottom: 25px !important;
     opacity: 1;
     transform: translateY(0);
 }
@@ -230,6 +240,7 @@ body::before {
     transition: var(--transition);
     width: calc(33.333% - 17px);
     min-width: 280px;
+    margin-bottom: 0 !important;
 }
 .review-card:hover {
     transform: translateY(-8px);
@@ -527,6 +538,8 @@ body::before {
     .login-btn { padding: 6px 14px; font-size: 0.75rem; }
     .tour-card { height: 340px; }
     .social-sidebar { display: none; }
-    .review-card { width: 100%; }
+    .review-card { width: 100% !important; margin-bottom: 0 !important; }
+    .review-grid { gap: 15px; margin-top: 15px; }
     .photo-grid { grid-template-columns: 1fr; }
+    .gallery-btn-wrapper { margin-top: 15px !important; }
 }
