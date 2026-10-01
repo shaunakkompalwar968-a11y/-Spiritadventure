@@ -34,12 +34,13 @@
         </div>
     </div>
 
-    <!-- Fixed Sticky Navbar (Merges with home bg at top, turns to blur gradient on scroll) -->
+    <!-- Fixed Sticky Navbar with Mobile Hamburger Drawer -->
     <nav id="navbar" class="custom-nav">
         <div class="nav-left">
             <a href="#home">
                 <img src="Assests/img/logo.png" alt="Spirit Adventures Logo" class="nav-logo-img">
             </a>
+            <!-- Desktop Links -->
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
@@ -50,12 +51,34 @@
             </ul>
         </div>
         <div class="nav-right">
-            <!-- Animated Top Navbar Book Now Button for Online Booking -->
+            <!-- Animated Book Now Button for Online Booking -->
             <button class="login-btn book-online-trigger pulse-nav-btn" type="button">
                 <i class="fas fa-calendar-check"></i> Book Now
             </button>
+            <!-- Mobile Menu Toggle Hamburger Button -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn" type="button" aria-label="Toggle Mobile Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div id="mobile-drawer" class="mobile-drawer">
+        <button id="mobile-drawer-close" class="mobile-drawer-close" type="button"><i class="fas fa-times"></i></button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-link">Home</a></li>
+            <li><a href="#about" class="mobile-link">About Us</a></li>
+            <li><a href="#destinations" class="mobile-link">Destinations</a></li>
+            <li><a href="#gallery" class="mobile-link">Gallery</a></li>
+            <li><a href="#reviews" class="mobile-link">Reviews</a></li>
+            <li><a href="#contact" class="mobile-link">Contact</a></li>
+        </ul>
+        <div class="mobile-drawer-footer">
+            <button class="login-btn book-online-trigger" style="width: 100%; justify-content: center;">
+                <i class="fas fa-calendar-check"></i> Book Now
+            </button>
+        </div>
+    </div>
 
     <!-- Split-Screen Hero Landing Page -->
     <section class="split-hero" id="home">
