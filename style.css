@@ -129,7 +129,7 @@ body::before {
 .tour-content h3 { font-size: 1rem; font-weight: 700; color: var(--black); }
 .tour-content p { font-size: 0.75rem; color: #666; margin-top: 2px; }
 
-/* --- PHOTO GALLERY GRID & ZERO-SPACE TOGGLE STYLES --- */
+/* --- PHOTO GALLERY GRID & TOGGLE STYLES --- */
 .gallery-section { background-color: var(--white); }
 .gallery-desc { font-size: 0.9rem; color: #666; margin-bottom: 30px; }
 .photo-grid {
@@ -181,31 +181,26 @@ body::before {
     transform: translateY(0);
 }
 
-/* Zero-Space Hidden State Logic */
+/* Zero-Space Hidden State Logic using display:none to completely eradicate gaps */
 .hidden-photo, .hidden-review {
-    max-height: 0;
+    display: none;
     opacity: 0;
-    overflow: hidden;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    pointer-events: none;
-    transition: max-height 0.6s ease, opacity 0.4s ease, margin 0.4s ease, padding 0.4s ease;
-}
-.hidden-photo.revealed, .hidden-review.revealed {
-    max-height: 800px;
-    opacity: 1;
-    pointer-events: auto;
-    margin-bottom: 25px !important;
-    padding: 35px 30px !important;
-    border-top: 5px solid var(--yellow) !important;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .hidden-photo.revealed {
-    padding: 0 !important; /* Photo grid items handle their own height */
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.hidden-review.revealed {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gallery-btn-wrapper {
-    margin-top: 20px;
+    margin-top: 25px !important;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -218,7 +213,7 @@ body::before {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
-    margin-top: 20px;
+    margin-top: 25px;
     justify-content: center;
 }
 .review-card {
@@ -347,13 +342,22 @@ body::before {
 .close-modal { position: absolute; top: 12px; right: 18px; font-size: 1.8rem; cursor: pointer; color: var(--teal); }
 .modal-input { width: 100%; padding: 10px 14px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-size: 0.85rem; background: var(--gray); }
 
-/* Welcome Popup Button Group Styles */
+/* Welcome Popup Button Group Styles & Mobile Sizing Fixes */
+.welcome-modal { position: fixed; inset: 0; background: rgba(7, 13, 26, 0.92); backdrop-filter: blur(15px); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 15px; transition: all 0.5s ease; }
+.welcome-modal.hidden { opacity: 0; pointer-events: none; transform: scale(1.05); }
+.welcome-modal-content { background: #0f1c3f; border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; text-align: center; margin: auto; }
+.welcome-close-btn { position: absolute; top: 12px; right: 15px; background: rgba(0,0,0,0.6); border: none; color: white; font-size: 0.9rem; padding: 6px 14px; border-radius: 20px; cursor: pointer; z-index: 20; }
+.welcome-video-wrapper { width: 100%; aspect-ratio: 16/9; background: black; }
+.welcome-video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+.welcome-text-box { padding: 20px; color: white; }
+.welcome-text-box h2 { font-size: 1.5rem; margin-bottom: 8px; color: var(--yellow); }
+.welcome-text-box p { font-size: 0.85rem; color: #cbd5e1; margin-bottom: 15px; }
+
 .welcome-btn-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    margin-top: 5px;
 }
 .outline-btn {
     background: transparent;
@@ -418,17 +422,6 @@ body::before {
 .chat-footer input { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 0.8rem; }
 .chat-footer button { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: white; border: none; cursor: pointer; }
 
-/* Welcome Popup */
-.welcome-modal { position: fixed; inset: 0; background: rgba(7, 13, 26, 0.92); backdrop-filter: blur(15px); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; transition: all 0.5s ease; }
-.welcome-modal.hidden { opacity: 0; pointer-events: none; transform: scale(1.05); }
-.welcome-modal-content { background: #0f1c3f; border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; max-width: 580px; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; text-align: center; }
-.welcome-close-btn { position: absolute; top: 15px; right: 20px; background: rgba(0,0,0,0.6); border: none; color: white; font-size: 0.9rem; padding: 8px 16px; border-radius: 20px; cursor: pointer; z-index: 20; }
-.welcome-video-wrapper { width: 100%; aspect-ratio: 16/9; background: black; }
-.welcome-video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
-.welcome-text-box { padding: 30px; color: white; }
-.welcome-text-box h2 { font-size: 1.8rem; margin-bottom: 10px; color: var(--yellow); }
-.welcome-text-box p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 20px; }
-
 /* Scroll Reveal */
 .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
@@ -463,4 +456,5 @@ body::before {
     .tour-card { height: 340px; }
     .social-sidebar { display: none; }
     .review-card { width: 100%; }
+    .photo-grid { grid-template-columns: 1fr; }
 }
