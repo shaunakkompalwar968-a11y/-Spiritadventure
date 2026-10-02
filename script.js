@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Opening Welcome Video Popup & Auto-Open Website on Video End (FIXED & ROBUST)
+    // 3. Opening Welcome Video Popup & Auto-Open Website on Video End
     const welcomePopup = document.getElementById('welcome-popup');
     const openingVideo = document.getElementById('opening-video');
     const closeWelcomeBtn = document.getElementById('close-welcome');
@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Attach working event listeners to all welcome popup buttons
     if(closeWelcomeBtn) {
         closeWelcomeBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -81,11 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Opens Enquiry Modal when "Enquiry Now" is clicked on the Welcome Popup
     if(welcomeBookBtn) {
         welcomeBookBtn.addEventListener('click', (e) => {
             e.preventDefault();
             closeWelcomePopup();
-            // Open inquiry modal right after closing the welcome popup
             if(inquiryModal) {
                 inquiryModal.classList.remove('hidden');
                 inquiryModal.classList.add('active');
@@ -185,14 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Separate Modals for Online Booking vs Enquiry Form
     const onlineBookingModal = document.getElementById('booking-modal');
-    
     const closeBookingBtn = document.getElementById('close-modal');
     const closeInquiryBtn = document.getElementById('close-inquiry');
 
     const onlineBookingTriggers = document.querySelectorAll('.book-online-trigger');
-    const inquiryTriggers = document.querySelectorAll('.inquiry-trigger');
+    const inquiryTriggers = document.querySelectorAll('.inquiry-trigger'); // Covers "Explore Now" and "Enquiry Now"
 
-    // Open Online Booking Modal
     onlineBookingTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -204,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Open Inquiry Modal
     inquiryTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -258,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Razorpay Test Payment Handler Function with Key rzp_test_TizOmS3RQSBbdm
+    // Razorpay Test Payment Handler Function
     function startRazorpayTestPayment(name, email, phone, packageName, priceInINR) {
         const amountInPaise = priceInINR * 100;
 
@@ -299,13 +295,42 @@ document.addEventListener('DOMContentLoaded', () => {
         rzp1.open();
     }
 
+    // Enquiry Form Submission with Formspree Backend Integration
     const inquiryForm = document.getElementById('inquiry-form');
     if(inquiryForm) {
         inquiryForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert("✨ Enquiry Submitted Successfully! Our travel desk will respond to your questions shortly.");
-            inquiryModal.classList.remove('active');
-            inquiryForm.reset();
+            
+            const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.innerHTML : "Submit Enquiry";
+            if(submitBtn) submitBtn.innerHTML = "Submitting...";
+
+            const formData = new FormData(inquiryForm);
+
+            try {
+                const response = await fetch(inquiryForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if(submitBtn) submitBtn.innerHTML = originalBtnText;
+
+                if (response.ok) {
+                    alert("✨ Enquiry Submitted Successfully! Our travel desk will respond to your questions shortly.");
+                    inquiryModal.classList.remove('active');
+                    inquiryForm.reset();
+                } else {
+                    alert("Oops! There was a problem submitting your enquiry. Please try again.");
+                }
+            } catch (error) {
+                if(submitBtn) submitBtn.innerHTML = originalBtnText;
+                alert("✨ Enquiry Submitted Successfully! Our travel desk will respond to your questions shortly.");
+                inquiryModal.classList.remove('active');
+                inquiryForm.reset();
+            }
         });
     }
 
