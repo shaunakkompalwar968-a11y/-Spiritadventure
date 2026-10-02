@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeInquiryBtn = document.getElementById('close-inquiry');
 
     const onlineBookingTriggers = document.querySelectorAll('.book-online-trigger');
-    const inquiryTriggers = document.querySelectorAll('.inquiry-trigger'); // Covers "Explore Now" and "Enquiry Now"
+    const inquiryTriggers = document.querySelectorAll('.inquiry-trigger');
 
     onlineBookingTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Razorpay Test Payment Handler Function
+    // Razorpay Test Payment Handler Function with Explicit UPI & QR Enabled
     function startRazorpayTestPayment(name, email, phone, packageName, priceInINR) {
         const amountInPaise = priceInINR * 100;
 
@@ -272,6 +272,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 "name": name,
                 "email": email,
                 "contact": phone
+            },
+            "config": {
+                "display": {
+                    "blocks": {
+                        "banks": {
+                            "name": "Pay via UPI, QR & More",
+                            "instruments": [
+                                { "method": "upi" },
+                                { "method": "qr" },
+                                { "method": "card" },
+                                { "method": "netbanking" }
+                            ]
+                        }
+                    },
+                    "sequence": ["block.banks"],
+                    "preferences": {
+                        "show_default_blocks": true
+                    }
+                }
             },
             "notes": {
                 "address": "Spirit Booking Portal - Test Mode"
@@ -295,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rzp1.open();
     }
 
-    // Enquiry Form Submission with Formspree Backend Integration
+    // Enquiry Form Submission with Formspree Backend Integration[cite: 2]
     const inquiryForm = document.getElementById('inquiry-form');
     if(inquiryForm) {
         inquiryForm.addEventListener('submit', async (e) => {
