@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <!-- Payement Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
@@ -34,7 +36,7 @@
         </div>
     </div>
 
-    <!-- Fixed Sticky Navbar with Mobile Hamburger Drawer -->
+    <!-- Navbar with Mobile Hamburger Drawer -->
     <nav id="navbar" class="custom-nav">
         <div class="nav-left">
             <a href="#home">
@@ -523,17 +525,17 @@
             <h2 style="color: var(--teal); font-weight: 800; margin-bottom: 5px;">Secure Online Booking</h2>
             <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">Complete your reservation and online payment process.</p>
             
-            <form id="booking-form" action="https://formspree.io/f/mdekbven" method="POST">
-                <input type="text" name="name" placeholder="Full Name" required class="modal-input">
-                <input type="tel" name="phone" placeholder="Phone / WhatsApp Number" required class="modal-input">
-                <input type="email" name="email" placeholder="Email Address" required class="modal-input">
+            <form id="booking-form">
+                <input type="text" name="name" id="booking-name" placeholder="Full Name" required class="modal-input">
+                <input type="tel" name="phone" id="booking-phone" placeholder="Phone / WhatsApp Number" required class="modal-input">
+                <input type="email" name="email" id="booking-email" placeholder="Email Address" required class="modal-input">
                 
-                <select name="package" required class="modal-input">
+                <select name="package" id="booking-package" required class="modal-input">
                     <option value="" disabled selected>Select Tour Package</option>
-                    <option value="coorg">2D 1N Coorg Getaway</option>
-                    <option value="goa">3D 2N Goa Trip</option>
-                    <option value="hampi">4D 3N Hampi, Gokarna & Dandeli</option>
-                    <option value="ooty">6D 5N Kodaikanal, Ooty & Mysore</option>
+                    <option value="coorg">2D 1N Coorg Getaway (₹5,000)</option>
+                    <option value="goa">3D 2N Goa Trip (₹8,500)</option>
+                    <option value="hampi">4D 3N Hampi, Gokarna & Dandeli (₹9,500)</option>
+                    <option value="ooty">6D 5N Kodaikanal, Ooty & Mysore (₹14,000)</option>
                 </select>
 
                 <div style="margin-bottom: 12px; text-align: left;">
@@ -541,7 +543,7 @@
                     <input type="date" name="travel_date" required class="modal-input" style="margin-bottom: 0;">
                 </div>
 
-                <button type="submit" class="btn yellow-btn" style="width: 100%; margin-top: 5px;">Proceed to Payment & Booking</button>
+                <button type="submit" class="btn yellow-btn" style="width: 100%; margin-top: 5px;">Proceed to Secure Payment</button>
             </form>
         </div>
     </div>
