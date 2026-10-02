@@ -10,7 +10,6 @@ SPIRIT ADVENTURES TRAVEL AGENCY WEBSITE - DOCUMENTATION \& MAINTENANCE GUIDE
 
 1\. BRAND \& PROJECT OVERVIEW
 
-\--------------------------------------------------------------------------------
 
 \- Brand Name: Spirit Adventures
 
@@ -21,8 +20,6 @@ SPIRIT ADVENTURES TRAVEL AGENCY WEBSITE - DOCUMENTATION \& MAINTENANCE GUIDE
 
 
 2\. CORE FEATURES INTEGRATED
-
-\--------------------------------------------------------------------------------
 
 \- Opening Welcome Video Modal: Plays automatically upon page load with sound/muted fallback. The moment the video finishes playing (via JavaScript 'ended' event listener), it automatically dismisses itself and opens the main website. Includes manual options ("1. Enter Website" and "2. Book Now").
 
@@ -96,11 +93,5 @@ SPIRIT ADVENTURES TRAVEL AGENCY WEBSITE - DOCUMENTATION \& MAINTENANCE GUIDE
 
 &#x20; \* Open `style.css` and delete or comment out the `body::before` block near the top of the file.
 
-
-
-================================================================================
-
 End of Documentation
-
-================================================================================
 
