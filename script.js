@@ -34,15 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Opening Welcome Video Popup & Auto-Open Website on Video End
+    // 3. Opening Welcome Video Popup & Auto-Open Website on Video End (FIXED & ROBUST)
     const welcomePopup = document.getElementById('welcome-popup');
     const openingVideo = document.getElementById('opening-video');
     const closeWelcomeBtn = document.getElementById('close-welcome');
     const enterSiteBtn = document.getElementById('enter-site-btn');
+    const welcomeBookBtn = document.getElementById('welcome-book-btn');
+    const inquiryModal = document.getElementById('inquiry-modal');
 
     const closeWelcomePopup = () => {
-        if(welcomePopup && openingVideo) {
-            openingVideo.pause();
+        if(welcomePopup) {
+            if(openingVideo) {
+                openingVideo.pause();
+            }
             welcomePopup.classList.add('hidden');
         }
     };
@@ -62,11 +66,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if(closeWelcomeBtn) closeWelcomeBtn.addEventListener('click', closeWelcomePopup);
-    if(enterSiteBtn) enterSiteBtn.addEventListener('click', closeWelcomePopup);
+    // Attach working event listeners to all welcome popup buttons
+    if(closeWelcomeBtn) {
+        closeWelcomeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeWelcomePopup();
+        });
+    }
+
+    if(enterSiteBtn) {
+        enterSiteBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeWelcomePopup();
+        });
+    }
+
+    if(welcomeBookBtn) {
+        welcomeBookBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeWelcomePopup();
+            // Open inquiry modal right after closing the welcome popup
+            if(inquiryModal) {
+                inquiryModal.classList.remove('hidden');
+                inquiryModal.classList.add('active');
+            }
+        });
+    }
     
     window.addEventListener('click', (e) => {
-        if (e.target === welcomePopup) closeWelcomePopup();
+        if (e.target === welcomePopup) {
+            closeWelcomePopup();
+        }
     });
 
     // 4. Scroll Reveal Animation Observer
@@ -155,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Separate Modals for Online Booking vs Enquiry Form
     const onlineBookingModal = document.getElementById('booking-modal');
-    const inquiryModal = document.getElementById('inquiry-modal');
     
     const closeBookingBtn = document.getElementById('close-modal');
     const closeInquiryBtn = document.getElementById('close-inquiry');
@@ -163,11 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const onlineBookingTriggers = document.querySelectorAll('.book-online-trigger');
     const inquiryTriggers = document.querySelectorAll('.inquiry-trigger');
 
-    // Open Online Booking Modal (Top Navbar Book Now Button Only)
+    // Open Online Booking Modal
     onlineBookingTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            if(mobileDrawer) mobileDrawer.classList.remove('active'); // Close mobile drawer if open
+            if(mobileDrawer) mobileDrawer.classList.remove('active'); 
             if(onlineBookingModal) {
                 onlineBookingModal.classList.remove('hidden');
                 onlineBookingModal.classList.add('active');
@@ -175,11 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Open Inquiry Modal (All other buttons)
+    // Open Inquiry Modal
     inquiryTriggers.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            if(mobileDrawer) mobileDrawer.classList.remove('active'); // Close mobile drawer if open
+            if(mobileDrawer) mobileDrawer.classList.remove('active'); 
             if(inquiryModal) {
                 inquiryModal.classList.remove('hidden');
                 inquiryModal.classList.add('active');
@@ -199,15 +228,75 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === inquiryModal) inquiryModal.classList.remove('active');
     });
 
-    // Form Submissions
+    // Form Submissions & Razorpay Test Integration
     const bookingForm = document.getElementById('booking-form');
     if(bookingForm) {
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert("🎉 Online Booking & Payment Request Received! Our agent will contact you shortly to complete the transaction.");
             onlineBookingModal.classList.remove('active');
+
+            const customerNameInput = document.getElementById('booking-name');
+            const customerEmailInput = document.getElementById('booking-email');
+            const customerPhoneInput = document.getElementById('booking-phone');
+            const packageSelect = document.getElementById('booking-package');
+
+            const name = customerNameInput ? customerNameInput.value : "Valued Traveler";
+            const email = customerEmailInput ? customerEmailInput.value : "traveler@spiritadventures.in";
+            const phone = customerPhoneInput ? customerPhoneInput.value : "9876543210";
+            
+            let packagePrice = 5000; 
+            let selectedPkgName = "Coorg Getaway";
+            if (packageSelect) {
+                const val = packageSelect.value;
+                if (val === 'goa') { packagePrice = 8500; selectedPkgName = "Goa Beach Trip"; }
+                else if (val === 'hampi') { packagePrice = 9500; selectedPkgName = "Hampi, Gokarna & Dandeli"; }
+                else if (val === 'ooty') { packagePrice = 14000; selectedPkgName = "Kodaikanal, Ooty & Mysore"; }
+            }
+
+            startRazorpayTestPayment(name, email, phone, selectedPkgName, packagePrice);
             bookingForm.reset();
         });
+    }
+
+    // Razorpay Test Payment Handler Function with Key rzp_test_TizOmS3RQSBbdm
+    function startRazorpayTestPayment(name, email, phone, packageName, priceInINR) {
+        const amountInPaise = priceInINR * 100;
+
+        var options = {
+            "key": "rzp_test_TizOmS3RQSBbdm", 
+            "amount": amountInPaise, 
+            "currency": "INR",
+            "name": "Spirit",
+            "description": "Booking: " + packageName,
+            "image": "Assests/img/logo.png",
+            "handler": function (response){
+                alert("🎉 Test Payment Successful!\nPayment ID: " + response.razorpay_payment_id + "\nYour slot for " + packageName + " is confirmed!");
+            },
+            "prefill": {
+                "name": name,
+                "email": email,
+                "contact": phone
+            },
+            "notes": {
+                "address": "Spirit Booking Portal - Test Mode"
+            },
+            "theme": {
+                "color": "#136a6e"
+            }
+        };
+
+        if (typeof window.Razorpay === "undefined") {
+            alert("Razorpay SDK is loading or missing. Please check your internet connection.");
+            return;
+        }
+
+        var rzp1 = new window.Razorpay(options);
+        
+        rzp1.on('payment.failed', function (response){
+            alert("Payment simulation failed: " + response.error.description);
+        });
+
+        rzp1.open();
     }
 
     const inquiryForm = document.getElementById('inquiry-form');
