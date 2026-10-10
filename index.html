@@ -16,7 +16,6 @@
     <!-- NAVIGATION BAR -->
     <nav>
         <div class="nav-logo">
-            <!-- Replace Assests/img/logo.png with your actual uploaded logo file path -->
             <img src="Assests/img/logo.png" alt="Spirit Adventures Logo" onerror="this.src='https://placehold.co/150x40?text=Spirit+Adventures'">
         </div>
         <ul class="nav-links">
@@ -84,7 +83,6 @@
             <h2>Explore Our Featured Packages</h2>
         </div>
         <div class="destinations-grid">
-            <!-- Coorg -->
             <div class="destination-card">
                 <img src="https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80" alt="Coorg" class="destination-img">
                 <div class="duration-badge">2D 1N</div>
@@ -97,7 +95,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Goa -->
             <div class="destination-card">
                 <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80" alt="Goa" class="destination-img">
                 <div class="duration-badge">3D 2N</div>
@@ -110,7 +107,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Hampi & Dandeli -->
             <div class="destination-card">
                 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Hampi" class="destination-img">
                 <div class="duration-badge">4D 3N</div>
@@ -123,7 +119,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Ooty & Mysore -->
             <div class="destination-card">
                 <img src="https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=600&q=80" alt="Ooty" class="destination-img">
                 <div class="duration-badge">6D 5N</div>
@@ -245,14 +240,36 @@
         </div>
     </footer>
 
-    <!-- FLOATING ACTION BUTTONS -->
+    <!-- FLOATING ACTION BUTTONS (WHATSAPP, MAPS, & AI CHATBOT TOGGLE) -->
     <div class="floating-widgets">
+        <button class="float-btn ai-chat-toggle" onclick="toggleAIChat()" title="Spirit AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
         <a href="https://maps.app.goo.gl/me7tbu9Co6W8F4EHA" target="_blank" class="float-btn rate-float" title="Rate Us on Google Maps">
             <span>Rate<br>Us!</span>
         </a>
         <a href="https://wa.me/919666567551?text=Hi%20Spirit%20Adventures,%20I%20want%20to%20know%20more%20about%20your%20packages!" target="_blank" class="float-btn whatsapp-float" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
+    </div>
+
+    <!-- INTERACTIVE AI CHATBOT DRAWER -->
+    <div class="ai-chatbot-container" id="aiChatDrawer">
+        <div class="ai-chat-header">
+            <div class="ai-title">
+                <i class="fa-solid fa-robot"></i> Spirit AI Guide
+            </div>
+            <span class="close-ai" onclick="toggleAIChat()">&times;</span>
+        </div>
+        <div class="ai-chat-body" id="aiChatMessages">
+            <div class="ai-message bot">
+                Hi! Welcome to Spirit Adventures. How can I help you plan your getaway today?
+            </div>
+        </div>
+        <div class="ai-chat-footer">
+            <input type="text" id="aiUserInput" placeholder="Ask about destinations, pricing..." onkeypress="handleAIPress(event)">
+            <button onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
     </div>
 
     <!-- CUSTOMIZE / BOOKING MODALS -->
